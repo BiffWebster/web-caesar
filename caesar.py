@@ -25,19 +25,9 @@ def rotate_character(char, rot):
         else:
             return lowerCase[(alphabet_position(char) + rot) % len(lowerCase)]
 			
-def encrypt(text, key):
-    #print(alphabet_position("b"))
+def encrypt(text, rot):
     new_text = ""
-    count = 0
-    for eachChar in text: 
+    for eachChar in text:
+        new_text += rotate_character(eachChar, rot)
         
-        count += 1                    
-        if count == len(key):
-            count = 0
-        #print(count)
-        rot = alphabet_position(key[count-1])
-        #print(rot)
-        new_text += rotate_character(eachChar, rot) 
-        
-            
     return new_text
