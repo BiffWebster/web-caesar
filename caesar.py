@@ -1,33 +1,39 @@
-def alphabet_position(letter):
-    upperCase = ["A", "B", "C", 'D', "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-                 "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    lowerCase = ["a", "b", "c", "d", 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
-                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    
-    if letter in upperCase:
-        return upperCase.index(letter)
-    else:
-        return lowerCase.index(letter)
-		
-def rotate_character(char, rot): 
-    
-    upperCase = ["A", "B", "C", 'D', "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-                 "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    lowerCase = ["a", "b", "c", "d", 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
-                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    
-    #rot % 26 + char.index()
-    if char.isalpha() == False:
-        return char
-    else:
-        if char in upperCase:
-            return upperCase[(alphabet_position(char) + rot) % len(upperCase)]
+def alphabet_position(character):
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    lower = character.lower()
+    return alphabet.index(lower)
+
+def rotate_string_13(text):
+
+    rotated = ''
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+    for char in text:
+        rotated_idx = (alphabet_position(char) + 13) % 26
+        if char.isupper():
+            rotated = rotated + alphabet[rotated_idx].upper()
         else:
-            return lowerCase[(alphabet_position(char) + rot) % len(lowerCase)]
-			
-def encrypt(text, rot):
-    new_text = ""
-    for eachChar in text:
-        new_text += rotate_character(eachChar, rot)
-        
-    return new_text
+            rotated = rotated + alphabet[rotated_idx]
+
+    return rotated
+
+def rotate_character(char, rot):
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    rotated_idx = (alphabet_position(char) + rot) % 26
+
+    if char.isupper():
+        return alphabet[rotated_idx].upper()
+    else:
+        return alphabet[rotated_idx]
+
+def rotate_string(text, rot):
+
+    rotated = ''
+
+    for char in text:
+        if (char.isalpha()):
+            rotated = rotated + rotate_character(char, rot)
+        else:
+            rotated = rotated + char
+
+    return rotated
